@@ -1,0 +1,53 @@
+service=haproxy
+
+# haproxy needs to listen on port 80 and port 443.  I considered
+# several different ways of handling this.  Each has advantages and
+# disadvantages.
+#
+# For some details on podman flags see
+# https://github.com/rootless-containers/slirp4netns/issues/250
+#
+# 1.  Listen on a high port, use iptables.
+#
+# The config here is 
+#
+#        pod_args='-p 2628:2628 -p 19280:19280 -p 19243:19243 --network slirp4netns:port_handler=slirp4netns'
+#
+# , and in iptables is:
+#
+# sudo iptables -I PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 19280
+# sudo iptables -I PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 19243
+#
+# I don't like this because it means lsof is telling lies.
+#
+# 2.  Use a rootfull pod and listen on 80 and 443.
+#
+# The config here is:
+#
+#       pod_args='-p 2628:2628 -p 80:19280 -p 443:19243'
+#       CONTAINER_BIN='sudo /usr/bin/podman'
+#
+# I don't like this because rootful pods have vast magical powers.
+#
+# 3.  Allow anybody to open low ports.
+#
+# The config here is:
+#
+#       pod_args='-p 2628:2628 -p 80:19280 -p 443:19243 --network slirp4netns:port_handler=slirp4netns'
+#
+# , and then you also have to run:
+#
+#       # echo 80 > cat /proc/sys/net/ipv4/ip_unprivileged_port_start
+#
+# I don't like this because it gives out global privs, but SELinux
+# won't let us open low ports normally regardless, so it's not
+# *that* big a deal, although because we allow our podman users to
+# run unconfined, this means any podman container can run low ports.
+#
+# I chose #3; it seems least surprising.  I guess.
+#
+# Also, it means that the logs for haproxy show up in "journalctl --user -f",
+# which is there logs show up for every other container, so that's nice.
+#
+# The puppet code supporting it is in base/manifests/init.pp
+pod_args='-p 2628:2628 -p 80:19280 -p 443:19243 --network slirp4netns:port_handler=slirp4netns'

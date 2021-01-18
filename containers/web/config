@@ -1,0 +1,7 @@
+description="general digitalkingdom.org haproxy service"
+requires=''
+needs_network=true
+name=web
+version=1
+run_program=''
+run_args='-v $containerdir/data/letsencrypt:/etc/letsencrypt'

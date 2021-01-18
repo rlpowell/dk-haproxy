@@ -1,0 +1,2 @@
+MAILTO=webmaster@digitalkingdom.org
+37 */5 * * * /home/sphaproxy/haproxy/rebuild_images.sh
