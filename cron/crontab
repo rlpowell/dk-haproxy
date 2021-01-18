@@ -1,2 +1,3 @@
 MAILTO=webmaster@digitalkingdom.org
-37 */5 * * * /home/sphaproxy/haproxy/rebuild_images.sh
+37 */5 * * * /home/spdkhaproxy/dk-haproxy/rebuild_images.sh
+1  1   * * 1 /home/spdkhaproxy/dk-haproxy/renew_certs.sh
