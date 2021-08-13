@@ -1,8 +1,9 @@
 #!/bin/bash
 
-podman exec -u root -it web certbot certonly --standalone \
+podman exec -u root -it web certbot certonly --standalone --expand \
     -d digitalkingdom.org -d davidleepowell.com -d teddyb.org \
     -d www.digitalkingdom.org -d www.davidleepowell.com -d www.teddyb.org \
+    -d robinleepowell.name -d rlpowell.name \
     --non-interactive --agree-tos --email robinleepowell@gmail.com --http-01-port=8888
 podman exec -u root -it web chown -R $(id -un):$(id -gn) /etc/letsencrypt/
 
