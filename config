@@ -11,7 +11,7 @@ bundle=haproxy
 #
 # The config here is 
 #
-#        pod_args='-p 2628:2628 -p 19280:19280 -p 19243:19243 --network slirp4netns:port_handler=slirp4netns'
+#        pod_args='-p 2628:2628 -p 19280:19280 -p 19243:19243'
 #
 # , and in iptables is:
 #
@@ -33,7 +33,7 @@ bundle=haproxy
 #
 # The config here is:
 #
-#       pod_args='-p 2628:2628 -p 80:19280 -p 443:19243 --network slirp4netns:port_handler=slirp4netns'
+#       pod_args='-p 2628:2628 -p 80:19280 -p 443:19243'
 #
 # , and then you also have to run:
 #
@@ -50,4 +50,4 @@ bundle=haproxy
 # which is there logs show up for every other container, so that's nice.
 #
 # The puppet code supporting it is in base/manifests/init.pp
-pod_args='-p 2628:2628 -p 80:19280 -p 443:19243 --network slirp4netns:port_handler=slirp4netns'
+pod_args='-p 2628:2628 -p 80:19280 -p 443:19243'
