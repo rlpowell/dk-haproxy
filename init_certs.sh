@@ -6,8 +6,11 @@ podman exec -u root -it web certbot certonly --standalone --expand \
     -d robinleepowell.name -d rlpowell.name \
     -d gdoc-to-ao3.digitalkingdom.org \
     -d waffles.digitalkingdom.org \
+    -d mail.digitalkingdom.org -d stodi.digitalkingdom.org \
+    -d mail.teddyb.org -d stodi.teddyb.org \
+    -d mail.evolutionlab.org -d stodi.evolutionlab.org \
     --non-interactive --agree-tos --email robinleepowell@gmail.com --http-01-port=8888
-podman exec -u root -it web chown -R $(id -un):$(id -gn) /etc/letsencrypt/
+podman exec -u root -it web chown -R $(id -u):$(id -g) /etc/letsencrypt/
 
 cat containers/web/data/letsencrypt/live/digitalkingdom.org/fullchain.pem containers/web/data/letsencrypt/live/digitalkingdom.org/privkey.pem > containers/web/data/letsencrypt/live/digitalkingdom.org/haproxy.pem
 
