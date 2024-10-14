@@ -6,6 +6,7 @@ podman exec -u root -it web certbot certonly --standalone --expand \
     -d robinleepowell.name -d rlpowell.name \
     -d gdoc-to-ao3.digitalkingdom.org \
     -d waffles.digitalkingdom.org \
+    -d users.digitalkingdom.org \
     -d mail.digitalkingdom.org -d stodi.digitalkingdom.org \
     -d mail.teddyb.org -d stodi.teddyb.org \
     -d mail.evolutionlab.org -d stodi.evolutionlab.org \
