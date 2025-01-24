@@ -22,6 +22,10 @@ cat /home/spdkhaproxy/dk-haproxy/containers/web/data/letsencrypt/live/digitalkin
     /home/spdkhaproxy/dk-haproxy/containers/web/data/letsencrypt/live/digitalkingdom.org/privkey.pem > \
     /home/spdkhaproxy/dk-haproxy/containers/web/data/letsencrypt/live/digitalkingdom.org/haproxy.pem
 
+# .realm certs
+# Don't try to do a *.realm wildcard; it seems to not work in chrome
+CAROOT="/home/spdkhaproxy/dk-haproxy/misc/realm_certs/ca_root/" TRUST_STORES='none' mkcert -cert-file '/home/spdkhaproxy/dk-haproxy/misc/realm_certs/star.realm.pem' -key-file '/home/spdkhaproxy/dk-haproxy/misc/realm_certs/star.realm.key' -p12-file misc/realm_certs/star.realm.p12 hassio.realm waffles.realm plex.realm vaultwarden.realm pihole.realm pi-hole.realm hassio.r3alm waffles.r3alm plex.r3alm vaultwarden.r3alm pihole.r3alm pi-hole.r3alm 192.168.123.127
+
 systemctl --user restart web
 
 echo "cert renewal complete"

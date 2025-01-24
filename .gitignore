@@ -5,5 +5,8 @@
 # helps ripgrep not be silly
 .git
 
+cron/crontab
 containers/web/Dockerfile
 containers/web/data/
+misc/realm_certs/ca_root/
+misc/realm_certs/star.*

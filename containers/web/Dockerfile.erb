@@ -3,9 +3,12 @@
 <%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
 <%= "# YOU ARE IN THE WRONG PLACE" %>
 
-FROM haproxy:2.3
+FROM docker.io/library/haproxy:2.3
 
 RUN apt-get update
 RUN apt-get install -y certbot
 
 COPY misc/haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+COPY misc/realm_certs/star.realm.pem /usr/local/etc/star.realm.pem
+COPY misc/realm_certs/star.realm.key /usr/local/etc/star.realm.pem.key
+RUN chmod -R a+r /usr/local/etc/

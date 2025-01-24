@@ -16,3 +16,8 @@ podman exec -u root -it web chown -R $(id -u):$(id -g) /etc/letsencrypt/
 cat containers/web/data/letsencrypt/live/digitalkingdom.org/fullchain.pem containers/web/data/letsencrypt/live/digitalkingdom.org/privkey.pem > containers/web/data/letsencrypt/live/digitalkingdom.org/haproxy.pem
 
 systemctl --user restart web
+
+# .realm certs
+CAROOT="$HOME/dk-haproxy/misc/realm_certs/ca_root/" TRUST_STORES='none' mkcert -install
+# Don't try to do a *.realm wildcard; it seems to not work in chrome
+CAROOT="$HOME/dk-haproxy/misc/realm_certs//ca_root/" TRUST_STORES='none' mkcert -cert-file misc/realm_certs/star.realm.pem -key-file misc/realm_certs/star.realm.key -p12-file misc/realm_certs/star.realm.p12 hassio.realm waffles.realm plex.realm vaultwarden.realm pihole.realm pi-hole.realm hassio.r3alm waffles.r3alm plex.r3alm vaultwarden.r3alm pihole.r3alm pi-hole.r3alm 192.168.123.127

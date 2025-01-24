@@ -50,4 +50,7 @@ bundle=haproxy
 # which is there logs show up for every other container, so that's nice.
 #
 # The puppet code supporting it is in base/manifests/init.pp
-pod_args='-p 2628:2628 -p 80:19280 -p 443:19243'
+#
+# The 192.168.123.134 is externally facing ( 50.250.232.19 ) , the
+# 192.168.123.127 stuff is internal only
+pod_args='-p 2628:2628 -p 192.168.123.134:80:19280 -p 192.168.123.134:443:19243 -p 192.168.123.127:80:19380 -p 192.168.123.127:443:19343'
