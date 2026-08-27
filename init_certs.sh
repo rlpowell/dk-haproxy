@@ -1,8 +1,9 @@
 #!/bin/bash
 
-podman exec -u root -it web certbot certonly --standalone --expand \
+podman exec -u root -it web certbot certonly --cert-name digitalkingdom.org --standalone --expand \
     -d digitalkingdom.org -d davidleepowell.com -d teddyb.org \
     -d www.digitalkingdom.org -d www.davidleepowell.com -d www.teddyb.org \
+    -d plex.digitalkingdom.org \
     -d robinleepowell.name -d rlpowell.name \
     -d gdoc-to-ao3.digitalkingdom.org \
     -d waffles.digitalkingdom.org \
@@ -22,4 +23,4 @@ systemctl --user restart web
 # .realm certs
 CAROOT="$HOME/dk-haproxy/misc/realm_certs/ca_root/" TRUST_STORES='none' mkcert -install
 # Don't try to do a *.realm wildcard; it seems to not work in chrome
-CAROOT="$HOME/dk-haproxy/misc/realm_certs//ca_root/" TRUST_STORES='none' mkcert -cert-file misc/realm_certs/star.realm.pem -key-file misc/realm_certs/star.realm.key -p12-file misc/realm_certs/star.realm.p12 hassio.realm plex.realm vaultwarden.realm pihole.realm pi-hole.realm hassio.r3alm waffles.realm waffles.r3alm hashbrowns.realm hashbrowns.r3alm lemonade.realm lemonade.r3alm plex.r3alm vaultwarden.r3alm pihole.r3alm pi-hole.r3alm unifi.realm unifi.r3alm 192.168.123.127
+CAROOT="$HOME/dk-haproxy/misc/realm_certs/ca_root/" TRUST_STORES='none' mkcert -cert-file misc/realm_certs/star.realm.pem -key-file misc/realm_certs/star.realm.key -p12-file misc/realm_certs/star.realm.p12 hassio.realm plex.realm vaultwarden.realm pihole.realm pi-hole.realm hassio.r3alm waffles.realm waffles.r3alm hashbrowns.realm hashbrowns.r3alm lemonade.realm lemonade.r3alm plex.r3alm vaultwarden.r3alm pihole.r3alm pi-hole.r3alm unifi.realm unifi.r3alm 192.168.123.127
