@@ -1,8 +1,8 @@
 #!/bin/bash
 
 podman exec -u root -it web certbot certonly --cert-name digitalkingdom.org --standalone --expand \
-    -d digitalkingdom.org -d davidleepowell.com -d teddyb.org \
-    -d www.digitalkingdom.org -d www.davidleepowell.com -d www.teddyb.org \
+    -d digitalkingdom.org -d davidleepowell.com -d davidleepowell.org -d teddyb.org \
+    -d www.digitalkingdom.org -d www.davidleepowell.com -d www.davidleepowell.org -d www.teddyb.org \
     -d plex.digitalkingdom.org \
     -d robinleepowell.name -d rlpowell.name \
     -d gdoc-to-ao3.digitalkingdom.org \
